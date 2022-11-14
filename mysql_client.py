@@ -1,4 +1,5 @@
-from mysql.connector import connect, Error
+from mysql.connector import connect
+
 
 def main():
     with connect(
@@ -17,6 +18,11 @@ def main():
             """
             cursor.execute(create_table_sql)
             cursor.execute("INSERT INTO TABLE VALUES('mark', 'secret')")
+            user = input('Which user would you like the details for?')
+            cursor.execute(f'SELECT {user} FROM users')
+            result = cursor.fetchmany()
+            print(result)
+
 
 if __name__ == "__main__":
     main()
